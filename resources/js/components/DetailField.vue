@@ -35,22 +35,16 @@
                                 'bg-danger-light': !groups[groupName].active && !groups[groupName].semiActive}"
                                   class="bg-warning-light inline-flex items-center py-1 px-2 rounded-full font-bold text-sm leading-tight mr-2">
                             <Icon v-if="groups[groupName].active"
-                                  type="check-circle"
-                                  width="24"
-                                  height="24"
-                                  viewBox="0 0 24 24"
+                                  name="check-circle"
+                                  type="solid"
                                   class="text-green-500"/>
                             <Icon v-else-if="groups[groupName].semiActive"
-                                  type="minus-circle"
-                                  width="24"
-                                  height="24"
-                                  viewBox="0 0 24 24"
-                                  class="fill-none text-yellow-500"/>
+                                  name="minus-circle"
+                                  type="solid"
+                                  class="text-yellow-500"/>
                             <Icon v-else-if="!groups[groupName].semiActive && !groups[groupName].active"
-                                  type="x-circle"
-                                  width="24"
-                                  height="24"
-                                  viewBox="0 0 24 24"
+                                  name="x-circle"
+                                  type="solid"
                                   class="text-red-500"/>
                           </span>
                           <h4>{{ groupName }}</h4>
@@ -91,9 +85,10 @@
 import HandlesGroupStates from '../mixins/HandlesGroupStates';
 import Collapsible from '../mixins/Collapsible';
 import IconCollapsible from "./Icons/IconCollapsible";
+import { Icon } from 'laravel-nova-ui';
 
 export default {
-    components: {IconCollapsible},
+    components: {IconCollapsible, Icon},
     mixins: [HandlesGroupStates, Collapsible],
 
     props: ['resource', 'resourceName', 'resourceId', 'field'],

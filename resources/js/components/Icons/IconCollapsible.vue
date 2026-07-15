@@ -1,21 +1,18 @@
 <template>
-    <Icon
-        v-if="value"
-        :viewBox="viewBox"
-        :width="width"
-        :height="height"
-        :type="type"
-    />
-    <Icon
-        v-else
-        :viewBox="viewBox"
-        :width="width"
-        :height="height"
-        :type="typeElse"
-    />
+    <!--
+      Nova 5's Icon takes the icon name via `name` and uses `type` only for the
+      Heroicons variant (outline/solid/mini/micro). The `type`/`typeElse` props
+      here still carry the icon name (chevron-up / chevron-down) so callers stay
+      unchanged. viewBox/width/height are ignored by Nova 5's Icon (size follows
+      the variant), so they are no longer forwarded.
+    -->
+    <Icon :name="value ? type : typeElse" type="outline" />
 </template>
 <script>
+import { Icon } from 'laravel-nova-ui'
+
 export default {
+    components: { Icon },
     props: {
         value: {
             type: Boolean,
@@ -28,18 +25,6 @@ export default {
         typeElse: {
             type: String,
             default: 'chevron-down'
-        },
-        viewBox: {
-            type: String,
-            default: '0 0 20 20',
-        },
-        width: {
-            type: [Number, String],
-            default: 20,
-        },
-        height: {
-            type: [Number, String],
-            default: 20,
         },
     },
 }
