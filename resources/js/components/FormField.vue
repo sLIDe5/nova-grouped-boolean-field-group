@@ -34,9 +34,7 @@
                                     name="permission-filter-select"
                                     id="permission-filter"
                                     :options="field.filterOptions"
-                                    :value="selectedGroup"
-                                    :selected="selectedGroup"
-                                    @change="filterGroups($event)"
+                                    @selected="filterGroups"
                     >
                         <option value="" selected>
                             __
@@ -174,8 +172,14 @@ export default {
             this.refreshGroupState(this.value);
         },
 
-        filterGroups(value) {
-            this.selectedGroup = value;
+        /*
+         * Nova 5's SelectControl emits `selected` with the chosen option
+         * object, or undefined for the empty placeholder option. A plain
+         * `@change` listener falls through to the native <select> and
+         * receives the DOM event instead.
+         */
+        filterGroups(option) {
+            this.selectedGroup = option?.value ?? null;
         }
     },
 
